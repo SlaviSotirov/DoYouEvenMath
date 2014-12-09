@@ -17,10 +17,9 @@ class GameInterface:
         Base.metadata.create_all(engine)
 
         self.session = Session(bind=engine)
-        
 
     def insert_playername(self):
-        self.player_name = input("")
+        self.playername = input("Type your name: ")
 
     def get_score(self):
         return self.game.level ** 2
@@ -37,7 +36,6 @@ class GameInterface:
     def get_player_score(self):
         return Player(name=self.player_name, score=self.get_score())
 
-
     def play(self):
         self.insert_playername()
         while True:
@@ -53,12 +51,22 @@ class GameInterface:
                 self.save_score(self.get_player_score())
                 break
 
+    def start_game(self):
+        while True:
+            command = input('Type "play" to play or "highscore" to see top 10 players \n>? ')
+            if command == "play":
+                self.play()
+            elif command == "highscore":
+                self.get_top10()
+            elif command == "exit":
+                return
+            else:
+                print("Invalid command! Please try again")
 
 
 def main():
     asd = GameInterface()
-    asd.play()
-    asd.get_top10()
+    asd.start_game()
 
 if __name__ == '__main__':
     main()

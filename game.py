@@ -92,21 +92,9 @@ class Game:
         return correct_answer == user_answer
 
     def increase_difficulty(self):
-        if self.level % 5 == 0:
+        if self.level % 10 == 0:
             self.difficulty += 1
 
     def level_up(self):
         self.level += 1
-
-
-def main():
-    asd = Game()
-    quiz = asd.generate_quiz()
-    print("What is the answer to {}".format(asd.quiz_to_string(quiz)))
-    ans = asd.insert_answer()
-    the_real = asd.solve_quiz(quiz)
-    print(asd.is_correct(the_real, ans))
-
-
-if __name__ == '__main__':
-    main()
+        self.increase_difficulty()
